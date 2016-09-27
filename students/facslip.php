@@ -84,7 +84,7 @@ $userin = $_SESSION["user"];
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="borslip.php"><i class="fa fa-circle-o"></i> Equipment Borrower's Slip</a></li>
+            <li><a href="borslip.php"><i class="fa fa-circle-o"></i> Borrower's Slip</a></li>
             <li class="active"><a href="facslip.php"><i class="fa fa-circle-o"></i> Facilities Use Slip</a></li>
           </ul>
         </li>
