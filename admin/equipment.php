@@ -53,7 +53,7 @@ $userin = $_SESSION["name"];
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+        <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
@@ -83,24 +83,22 @@ $userin = $_SESSION["name"];
 
         <li class="active treeview">
           <a href="#">
-             <i class="fa fa-camera"></i> <span>Equipments</span> </a>
+             <i class="fa fa-wrench"></i> <span>Equipments</span> </a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="equipment.php"><i class="fa fa-circle-o"></i>  Equipment List</a></li>
             <li><a href="#" data-toggle="modal" data-target="#viewpending"><i class="fa fa-circle-o"></i>  View Pending Request</a></li>
             <li><a href="#" data-toggle="modal" data-target="#viewapproved"><i class="fa fa-circle-o"></i> View Approved</a></li>
             <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Student List</a></li>
           </ul>
         </li>
 
-        <li class="treeview">
+      <li class="treeview">
           <a href="room.php">
-            <i class="fa fa-camera"></i>
+            <i class="fa fa-home"></i>
             <span>Rooms</span>
-            
           </a>
         </li>
 
@@ -110,8 +108,9 @@ $userin = $_SESSION["name"];
             <span>Scan</span>
           </a>
         </li>
-
-            </section>
+        </ul>
+      </ul>
+    </section>
     <!-- /.sidebar -->
   </aside>
 
