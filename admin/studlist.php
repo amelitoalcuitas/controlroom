@@ -31,11 +31,7 @@ $userin = $_SESSION["name"];
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-    <!-- fullCalendar 2.2.5-->
-  <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.min.css">
-  <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.print.css" media="print">
 
- 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -71,7 +67,7 @@ $userin = $_SESSION["name"];
           </a>
         </li>
 
-        <li class="treeview">
+        <li class="active treeview">
           <a href="equipment.php">
              <i class="fa fa-wrench"></i> <span>Equipments</span>
             <span class="pull-right-container">
@@ -79,10 +75,9 @@ $userin = $_SESSION["name"];
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="equipment.php"><i class="fa fa-circle-o"></i>  Equipment List</a></li>
             <li><a href="#" data-toggle="modal" data-target="#viewpending"><i class="fa fa-circle-o"></i>  View Pending Request</a></li>
             <li><a href="#" data-toggle="modal" data-target="#viewapproved"><i class="fa fa-circle-o"></i> View Approved</a></li>
-            <li><a href="studlist.php"><i class="fa fa-circle-o"></i> Student List</a></li>
+            <li class="active"><a href="studlist.php"><i class="fa fa-circle-o"></i> Student List</a></li>
           </ul>
         </li>
 
@@ -93,7 +88,7 @@ $userin = $_SESSION["name"];
           </a>
         </li>
 
-         <li class="active treeview">
+         <li class="treeview">
           <a href="scan.php">
             <i class="fa fa-camera"></i>
             <span>Scan</span>
@@ -107,59 +102,43 @@ $userin = $_SESSION["name"];
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <?php include "student_list.php";?>
-
-  </div>
-  </div>
-
-  <div id='wrap'>
-    <div >
-      <video width="350" height="400" id="video" autoplay></video>
-    </div>
-    <div>
-    <div class = "form-group">
-      <button id='snap'>Take snapshot</button>
-       <button id='scan'>Scan Code</button>
-    </div>
-    
-    </div>
-  </div>
-  <div style='float:left;'>
-    
-  </div>
- 
-  <div>
-    <center><h1 id='results'></h1></center>
-  </div><canvas id="qr-canvas"></canvas>
-</div>
-             
-
-           
-            </div>
-            <!-- /.box-body -->
-          </div>
-          </div>
-          </div>
-         </section>
-          <!-- /.box -->
-
-
+    <section class="content-header">
+      <h1>
+        Student List
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Rooms</li>
+      </ol>
     </section>
+
     <!-- Main content -->
-    
+    <section class="content">
+      <?php include "student_list.php";?>
+    </section>
+    <!-- /.content -->
 
-</div>
-</div>
 
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.3.5
+    </div>
+    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+  </footer>
+</div>
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../bootstrap/js/bootstrap.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<!-- Slimscroll -->
+<!-- DataTables -->
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
 <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="../plugins/fastclick/fastclick.js"></script>
@@ -167,37 +146,7 @@ $userin = $_SESSION["name"];
 <script src="../dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
-<!-- fullCalendar 2.2.5 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="../plugins/fullcalendar/fullcalendar.min.js"></script>
-<!-- Page specific script -->
-  
-  <script src="scanner/js/jquery.js"></script>
-  <script src="scanner/build/qcode-decoder.min.js"></script>
-  <script src="scanner/js/adapter.js"></script>
-  <script src="scanner/js/common.js"></script>
-  <script src="scanner/js/main.js"></script>
-  <script src="scanner/js/canvas.js"></script>
-  <script src="scanner/js/ga.js"></script>
-  
-  <script type="scanner/text/javascript" src="src/grid.js"></script>
-  <script type="scanner/text/javascript" src="src/version.js"></script>
-  <script type="scanner/text/javascript" src="src/detector.js"></script>
-  <script type="scanner/text/javascript" src="src/formatinf.js"></script>
-  <script type="scanner/text/javascript" src="src/errorlevel.js"></script>
-  <script type="scanner/text/javascript" src="src/bitmat.js"></script>
-  <script type="scanner/text/javascript" src="src/datablock.js"></script>
-  <script type="scanner/text/javascript" src="src/bmparser.js"></script>
-  <script type="scanner/text/javascript" src="src/datamask.js"></script>
-  <script type="scanner/text/javascript" src="src/rsdecoder.js"></script>
-  <script type="scanner/text/javascript" src="src/gf256poly.js"></script>
-  <script type="scanner/text/javascript" src="src/gf256.js"></script>
-  <script type="scanner/text/javascript" src="src/decoder.js"></script>
-  <script type="scanner/text/javascript" src="src/qrcode.js"></script>
-  <script type="scanner/text/javascript" src="src/findpat.js"></script>
-  <script type="scanner/text/javascript" src="src/alignpat.js"></script>
-  <script type="scanner/text/javascript" src="src/databr.js"></script>
-
-
+<!-- page script -->
+</script>
 </body>
 </html>
