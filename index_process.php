@@ -12,7 +12,7 @@ if(isset($_POST['login']))
     $sqladmin = "SELECT * from admin WHERE admin_username = '".$username."' AND admin_password = '".$password."'";
     $result = $dbCon->query($sqladmin);
 
-    $sqlstudent = "SELECT * from student WHERE username = '".$username."' AND password = '".$password."'";
+    $sqlstudent = "SELECT * from student WHERE username = '".$username."' AND password = '".$password."' AND student_status!='blocked'";
 			    $result2 = $dbCon->query($sqlstudent);
 
     if($result->num_rows > 0 )

@@ -61,9 +61,25 @@
                                     <span id="type_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['student_email'];?> </span>
                                     <input type="text" class="inpt" id="type_input_<?php echo $row['assest_id'];?>" value="<?php echo $row['equipment_type'];?>" style="display:none;">
                                   </td>
+                                  <?php 
+                                  if($row['student_status']!='blocked')
+                                  { ?>
                                   <td>
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#viewblock">Block</button>
+                                    <a href="blockstudent.php?id=<?php echo $row['student_id']; ?>"><button class="btn btn-danger" >Block</button> </a>
                                   </td>
+                                
+                                <?php 
+                              } else {
+                                ?>
+                                  <td>
+                                    <a href="blockstudent.php?unblockid=<?php echo $row['student_id']; ?>"><button class="btn btn-success" >Unblock</button> </a>
+                                  </td>
+
+                            <?php  }
+
+
+                                ?>
+
                                 </tr>
 
                                    <?php
