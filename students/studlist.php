@@ -78,12 +78,12 @@ $userin = $_SESSION["name"];
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <!--<ul class="treeview-menu">
+          <ul class="treeview-menu">
             <li><a href="equipment.php"><i class="fa fa-circle-o"></i>  Equipment List</a></li>
             <li><a href="#" data-toggle="modal" data-target="#viewpending"><i class="fa fa-circle-o"></i>  View Pending Request</a></li>
             <li><a href="#" data-toggle="modal" data-target="#viewapproved"><i class="fa fa-circle-o"></i> View Approved</a></li>
-            <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Student List</a></li>
-          </ul>-->
+            <li><a href="studlist.php"><i class="fa fa-circle-o"></i> Student List</a></li>
+          </ul>
         </li>
 
         <li class="treeview">
@@ -107,49 +107,8 @@ $userin = $_SESSION["name"];
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-       Scanner
-      </h1>
+    <?php include "student_list.php";?>
 
-
-      <ol class="breadcrumb">
-        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Scan</li>
-      </ol>
-
-
-        <section class="content">
-      <div class="row">
-      
-          <div class="col-md-6 col-md-offset-0">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Scan Qr Code</h3>
-            </div>
-            <div class="box-body">
-
-          
-          <div id="container">
-          <div class="row">
-          <div class="col-md-12">
-          <div id="container">
-      
-        <div style='display:none;'>
-          <div class="select">
-            <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
-          </div>
-
-          <div class="select">
-            <label for="audioOutput">Audio output destination: </label><select id="audioOutput"></select>
-          </div>
-        </div>
-        
-        <div class="select">
-          <label for="videoSource">Video source: </label><select id="videoSource" class='form-control'></select>
-        </div>
-        
-      </div>
   </div>
   </div>
 

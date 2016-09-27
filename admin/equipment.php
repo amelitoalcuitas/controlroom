@@ -91,7 +91,7 @@ $userin = $_SESSION["name"];
           <ul class="treeview-menu">
             <li><a href="#" data-toggle="modal" data-target="#viewpending"><i class="fa fa-circle-o"></i>  View Pending Request</a></li>
             <li><a href="#" data-toggle="modal" data-target="#viewapproved"><i class="fa fa-circle-o"></i> View Approved</a></li>
-            <li><a href="student_list.php"><i class="fa fa-circle-o"></i> Student List</a></li>
+            <li><a href="studlist.php"><i class="fa fa-circle-o"></i> Student List</a></li>
           </ul>
         </li>
 
