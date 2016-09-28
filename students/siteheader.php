@@ -39,7 +39,7 @@
                   <a href="S_logout.php" class="btn btn-default btn-flat">Sign out</a>
                 </div>
                 <div class="pull-left">
-                  <a href="S_profile.php" class="btn btn-default btn-flat">Profile</a>
+                  <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
                 </div>
               </li>
             </ul>
