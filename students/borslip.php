@@ -104,7 +104,7 @@ $userin = $_SESSION["user"];
       <ol class="breadcrumb">
         <li><a href="index.html"><i class="fa fa-camera"></i> Home</a></li>
         <li class="active">Forms</li>
-        <li class="active">Equipment Borrower's Slip</li>
+        <li class="active">Borrower's Slip</li>
       </ol>
     </section>
 

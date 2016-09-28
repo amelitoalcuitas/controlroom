@@ -1,5 +1,5 @@
 <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="dashboard.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>ST</b>P</span>
       <!-- logo for regular state and mobile devices -->
