@@ -54,9 +54,6 @@ $userin = $_SESSION["user"];
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-        
-      </div>
       <!-- search form -->
 
       <!-- /.search form -->
@@ -102,8 +99,8 @@ $userin = $_SESSION["user"];
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-        </div>
-          
+        
+            <div class="box">
            <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">

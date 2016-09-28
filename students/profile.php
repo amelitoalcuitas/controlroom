@@ -59,7 +59,7 @@ $userin = $_SESSION["user"];
                 <span>Equipments</span>
               </a>
             </li>
-            <li class="treeview active">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-edit"></i>
                 <span>Forms</span>
@@ -85,7 +85,6 @@ $userin = $_SESSION["user"];
           </h1>
           <ol class="breadcrumb">
             <li><a href="index.html"><i class="fa fa-camera"></i> Home</a></li>
-            <li class="active">Forms</li>
             <li class="active">Profile</li>
           </ol>
         </section>

@@ -54,9 +54,6 @@ $userin = $_SESSION["user"];
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-        
-      </div>
       <!-- search form -->
 
       <!-- /.search form -->
