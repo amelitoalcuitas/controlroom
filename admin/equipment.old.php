@@ -14,7 +14,6 @@ $userin = $_SESSION["name"];
 <!DOCTYPE html>
 <html>
 <head>
-<title> Room List </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Tell the browser to be responsive to screen width -->
@@ -33,33 +32,12 @@ $userin = $_SESSION["name"];
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 
-  <script>
-
-  function showSched(str) {
-    document.getElementById("tablebody").innerHTML = "wwew";
-    if (str == "") {
-        document.getElementById("tablebody").innerHTML = "";
-        return;
-    } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("tablebody").innerHTML = xmlhttp.responseText;
-            }
-        };
-        xmlhttp.open("GET","showsched.php?roomnum="+str,true);
-        xmlhttp.send();
-    }
-  }
-
-  </script>
 </head>
+
+<script type="text/javascript">
+  var buttonid = 0;   
+</script>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -72,18 +50,11 @@ $userin = $_SESSION["name"];
         <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
-
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+        <div class="pull-left image">
+          
         </div>
-      </form>
+        
+      </div>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
@@ -94,22 +65,21 @@ $userin = $_SESSION["name"];
           </a>
         </li>
 
-        <li class="treeview">
-          <a href="equipment.php">
-             <i class="fa fa-wrench"></i> <span>Equipments</span>
+        <li class="active treeview">
+          <a href="#">
+             <i class="fa fa-wrench"></i> <span>Equipments</span> </a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <!--<ul class="treeview-menu">
-            <li><a href="equipment.php"><i class="fa fa-circle-o"></i>  Equipment List</a></li>
+          <ul class="treeview-menu">
             <li><a href="#" data-toggle="modal" data-target="#viewpending"><i class="fa fa-circle-o"></i>  View Pending Request</a></li>
             <li><a href="#" data-toggle="modal" data-target="#viewapproved"><i class="fa fa-circle-o"></i> View Approved</a></li>
-            <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Student List</a></li>
-          </ul>-->
+            <li><a href="studlist.php"><i class="fa fa-circle-o"></i> Student List</a></li>
+          </ul>
         </li>
 
-        <li class="treeview active">
+      <li class="treeview">
           <a href="room.php">
             <i class="fa fa-home"></i>
             <span>Rooms</span>
@@ -123,6 +93,7 @@ $userin = $_SESSION["name"];
           </a>
         </li>
         </ul>
+      </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
@@ -132,11 +103,11 @@ $userin = $_SESSION["name"];
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Room List
+        Equipment List
       </h1>
       <ol class="breadcrumb">
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Rooms</li>
+        <li class="active">Equipments</li>
       </ol>
     </section>
 
@@ -148,53 +119,68 @@ $userin = $_SESSION["name"];
 
           <div class="box">
             <div class="box-header">
-              <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Room</button>
-               <button class="btn btn-primary" data-toggle="modal" data-target="#viewpending">View Pending Request</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Equipment</button>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-
-                  <th>Room Code</th>
-                  <th>Room Type</th>
-                  <th>Room Location</th>
-                  <th> Schedule </th>
+                  
+                  <th>Equipment ID</th>
+                  <th>Equipment Name</th>
+                  <th>Equipment Type</th>
+                  <th>Availability</th>
+                  <th>Date Added</th>
+                  <th> </th>
                 </tr>
                 </thead>
                 <tbody>
-
+                
                 <!--connection to database-->
+                       <?php
+                          $conn = $dbCon;
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                            } 
 
-                     <?php
-                        $conn = $dbCon;
-                        if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                            }
-
-                            $sql = "SELECT * FROM room";
+                            $sql = "SELECT * FROM equipment where availability = 'true' ";
                             $result = $conn->query($sql);
 
+                            if ($result->num_rows > 0) {
 
-                           if ($result->num_rows > 0) {
                              while($row = $result->fetch_assoc()) {
                                 ?>
-                                <tr>
-
-                                <td> <?php echo $row['room_num'];?> </td>
-                                <td> <?php echo $row['room_type'];?> </td>
-                                <td> <?php echo $row['room_location'];?> </td>
-                                <td> <button type="button" class="viewbutt btn btn-primary" data-toggle="modal" data-target="#viewModal" onclick="showSched(this.value)" value="<?php echo $row['room_num'];?>">View</button> </td>
-
+                                <tr id="row_<?php echo $row['assest_id'];?>">
+                                  <td style="width:110px"> 
+                                    <span id="id_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['assest_id'];?> </span>
+                                  </td>
+                                  <td> 
+                                    <span id="name_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['equipment_name'];?> </span>
+                                    <input type="text" class="inpt" id="name_input_<?php echo $row['assest_id'];?>" value="<?php echo $row['equipment_name'];?>" style="display:none;">
+                                  </td>
+                                  <td> 
+                                    <span id="type_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['equipment_type'];?> </span>
+                                    <input type="text" class="inpt" id="type_input_<?php echo $row['assest_id'];?>" value="<?php echo $row['equipment_type'];?>" style="display:none;">
+                                  </td>
+                                  <td> 
+                                    <span id="avail_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['availability'];?> </span>
+                                  </td>
+                                  <td> 
+                                    <span id="date_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['date_acquired'];?></span>
+                                    <input type="date" class="inpt" id="date_input_<?php echo $row['assest_id'];?>" value="<?php echo $row['date_acquired'];?>" style="display:none;">
+                                  </td>
+                                  <td> 
+                                    <input type="button" class="editbutton btn btn-primary" id="edit_<?php echo $row['assest_id'];?>" name="<?php echo $row['assest_id'];?>" value="Edit">
+                                    <button style="display:none;" type="button" class="donebutton btn btn-success" id="done_<?php echo $row['assest_id'];?>" name="<?php echo $row['assest_id'];?>"> <span class="fa fa-check"> </span> </button>
+                                    <button style="display:none;" type="button" class="delbutton btn btn-danger" id="del_<?php echo $row['assest_id'];?>" name="<?php echo $row['assest_id'];?>"> <span class="fa fa-trash"> </span> </button>
+                                  </td> 
                                 </tr>
-
 
                                    <?php
                                 }
-                            }
-                            ?>
-
+                            }   
+                            ?>    
 
                 </tbody>
               </table>
@@ -209,7 +195,7 @@ $userin = $_SESSION["name"];
     </section>
     <!-- /.content -->
 
-
+    
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -422,75 +408,72 @@ $userin = $_SESSION["name"];
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">Add Room</h4>
+              <h4 class="modal-title" id="myModalLabel">Add Equipment</h4>
             </div>
             <form role="form" action = "add_equip.php" method ="post" >
               <div class="modal-body">
-
+                
                 <div class="form-group">
-                  <label>Room Code</label>
-                  <input type="text" class="form-control" name = "roomnum">
+                  <label>Equipment Name</label>
+                  <input type="text" class="form-control" name = "equipname">
                 </div>
                 <div class="form-group">
-                  <label>Room Type</label>
-                  <select name="roomtype" class="form-control">
-                    <option value="speech"> Speech </option>
-                    <option value="greenroom"> Green Room</option>
-                    <option value="lecture"> Lecture </option>
-                    <option value="laboratory"> Laboratory </option>
+                  <label>Equipment Type</label>
+                    <select class='form-control' name='equiptype'>
+                      <option value='Camera'>Camera</option>
+                      <option value='Speaker'>Speaker</option>
+                      <option value='SDcard'>SDcard</option>
+                      <option value='Tripod'>Tripod</option>
+                      <option value='Slider'>Slider</option>
+                      <option value='CameraBatteryCharger'>CameraBatteryCharger</option>
+                      <option value='Videomic'>Videomic</option>
+                      <option value='Microphone'>Microphone</option>
+                      <option value='ExtensionCord'>ExtensionCord</option>
+                      <option value='Amplifier'>Amplifier</option>
+                    </select>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Room Location</label>
-                  <input type="text" class="form-control" name = "roomloc">
+                  <label>Availability</label>
+                  <input type="radio" name="equipavail" value="true">True</input><input type="radio" name ="equipavail" value="false">False<br>
+                </div>
+                <div class="form-group">
+                  <label>Date Added</label>
+                  <input type="date" class="form-control" name="dateadded">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputFile">Equipment Picture</label>
+                  <input type="file" id="exampleInputFile">
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" name = "AddRoom" class="btn btn-primary" >Add</button>
+                <button type="submit" name = "RegisterEquip"class="btn btn-primary" >Add</button>
               </div>
             </form>
           </div>
         </div>
       </div>
-    <!-- MODAL END -->
 
-    <!-- MODAL START -->
-      <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModaldelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">Room Schedule</h4>
+              <h4 class="modal-title" id="myModalLabel">Add Equipment</h4>
             </div>
+            <form role="form" action = "add_equip.php" method ="post" >
 
-            <!-- /.box -->
 
-          <div class="box">
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Room Code</th>
-                  <th>Time Start</th>
-                  <th>Time End</th>
-                  <th>Day of Use</th>
-                  <th> Subject </th>
-                </tr>
-                </thead>
-                <tbody id = "tablebody" >
-                </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
+            </form>
           </div>
         </div>
       </div>
-      </div>
-    <!-- MODAL END -->
+<!--MODAL UPDATE END-->
+
+
 
     <!-- MODAL START -->
       <div class="modal fade" id="viewpending" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -500,7 +483,7 @@ $userin = $_SESSION["name"];
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">Room Schedule</h4>
+              <h4 class="modal-title" id="myModalLabel">Equipments Reserved</h4>
             </div>
 
             <!-- /.box -->
@@ -512,13 +495,7 @@ $userin = $_SESSION["name"];
                 <thead>
                 <tr>
 
-                  <th>Student ID</th>
-                  <th>Student Name</th>
-                  <th>Room Number</th>
-                  <th>Time Start</th>
-                  <th>Time End</th>
-                  <th> Reason </th>
-                  <th></th>
+                  <th>Reservation</th>
                   <th></th>
                 </tr>
                 </thead>
@@ -526,38 +503,32 @@ $userin = $_SESSION["name"];
               <?php
                   $conn = $dbCon;
 
-                $sqlpending = "SELECT room_subj_stud.room_subj_id, 
-                room_subj_stud.room_reserve_id,
-                room_subj_stud.student_id,
-                room_subj_stud.time_start,
-                room_subj_stud.time_end,
-                room_subj_stud.reason,
-                student.student_id,
-                student.student_name,
-                room.room_num
-                from room_subj_stud
-                JOIN student ON student.student_id = room_subj_stud.student_id
-                JOIN room_subject ON room_subject.room_subj_id = room_subj_stud.room_subj_id
-                JOIN room ON room.room_num = room_subject.room_num
-                WHERE room_subj_stud.application = 'pending'";
+
+                  $sqlpending = "SELECT reservation_code
+                  FROM equipment_reserved
+                  WHERE status = 'unapproved'
+                  GROUP BY reservation_code
+                  HAVING COUNT(reservation_code) >= 1";
+
+              
                 $resultpending = $conn->query($sqlpending);
 
                    if ($resultpending->num_rows > 0){
-                 while($row = $resultpending->fetch_assoc()) {
+                   while($row = $resultpending->fetch_assoc())
+                   {
+                    ?>
+                  <tr>  
+                      <td><?php echo  $row['reservation_code']; ?>  </td>
+                      <td><a type = "button" class = "btn btn-primary" href = "show_equip_res.php?rescode=<?php echo $row['reservation_code'];?>"> View  </a>  </td>
 
-                  echo "<tr>";
 
-                  echo "<td>" . $row['student_id'] . "</td>";
-                  echo "<td>" . $row['student_name'] . "</td>";
-                  echo "<td>" . $row['room_num'] . "</td>";
-                  echo "<td>" . $row['time_start'] . "</td>";
-                  echo "<td>" . $row['time_end'] . "</td>";
-                  echo "<td>" . $row['reason'] . "</td>";
-                  echo "<td>" ."<a type = 'button' class = 'btn btn-primary' href = 'approve_process.php?resid=".$row['room_reserve_id']."'>" ."Approve".  "</a>" ."</td>";
-                   echo "<td>" ."<a type = 'button' class = 'btn btn-primary' href = 'deny_process.php?resid=".$row['room_reserve_id']."'>" ."Deny".  "</a>" ."</td>";
-                  echo "</tr>";
-              }
-          }
+                  </tr>
+
+               <?php }
+               
+              } ?>  
+                         <td> No pending request  </td>
+               <?php
                 ?>
                 </tbody>
               </table>
@@ -571,6 +542,101 @@ $userin = $_SESSION["name"];
     <!-- MODAL END -->
 
 
+
+    <!-- MODAL START -->
+      <div class="modal fade" id="viewapproved" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Approved</h4>
+            </div>
+
+            <!-- /.box -->
+
+          <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+             
+              <?php
+                  $conn = $dbCon;
+
+                $id = "SELECT * FROM equipment_approved";
+                 $result = $conn->query($id);
+                 $result->num_rows;
+                 while($idRow = $result->fetch_assoc()){
+
+                 $idRow['reservation_code'];
+
+                $approved = "SELECT equipment_reserved.reservation_code,
+                equipment_reserved.equip_id,
+                equipment_reserved.stud_id,
+                equipment_reserved.reservation_id,
+                equipment_reserved.date_borrowed,
+                equipment_reserved.expected_date_return,
+                student.student_name,
+                student.student_course,
+                student.student_year,
+                equipment.equipment_name
+                from equipment_reserved
+                JOIN student ON student.student_id = equipment_reserved.stud_id
+                JOIN equipment ON equipment.assest_id = equipment_reserved.equip_id
+                WHERE equipment_reserved.status = 'approved' AND equipment_reserved.reservation_code = '".$idRow['reservation_code']."' ";
+
+                   $approvedID = $conn->query($approved);
+                    $approvedID2 = $conn->query($approved);
+                   
+                  if($approvedID->num_rows > 0 )
+                  {
+                     $row = $approvedID->fetch_assoc();
+                    
+                    echo '<table id="example1" class="table table-bordered table-striped">';
+                    echo '<thead>';
+                    echo '<tr>';
+
+                    echo '<th>Reservation</th>';
+                    echo '<th>Student Name</th>';
+                    echo '<th></th>';
+                    echo '<th></th>';
+                    echo '<th></th>';
+                    echo '<th>Date Start</th>';
+                    echo '<th>Date Return</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+                        
+                     echo "<td>" .$row['reservation_code'].  "</td>";
+                     echo "<td> " . $row['student_name']. "</td>";
+                        
+
+                         while($equipment = $approvedID2->fetch_assoc())
+                         {
+                         echo "<td>" .$equipment['equipment_name']."</td>";
+
+                         }
+                        
+                      echo "<td>"  .$row['date_borrowed']. "</td>";
+                      echo "<td>"  .$row['expected_date_return']. "</td>";
+                   
+                   }
+              }
+               ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+        </div>
+      </div>
+      </div>
+    <!-- MODAL END -->
+
+
+
+  
 </div>
 <!-- ./wrapper -->
 
@@ -591,22 +657,82 @@ $userin = $_SESSION["name"];
 <script src="../dist/js/demo.js"></script>
 <!-- page script -->
 <script>
+
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
+    $('#example1').DataTable({
+      "paging": false,
+      "lengthChange": true,
+      "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": false
+      "autoWidth": true
     });
   });
 
-  $(".viewbutt").click(function(){
-    var roomval = $(this).attr('value');
+  $(document).ready(function(){
+    $(".editbutton").click(function(){
+      var ID=$(this).attr('name');
+      $("#edit_"+ID).hide();
+      $("#name_"+ID).hide();
+      $("#type_"+ID).hide();
+      $("#date_"+ID).hide();
+      $("#done_"+ID).show();
+      $("#del_"+ID).show();
+      $("#name_input_"+ID).show();
+      $("#type_input_"+ID).show();
+      $("#date_input_"+ID).show();
   });
 
+  $(".donebutton").click(function(){
+    var ID=$(this).attr('name');
+    var name=$("#name_input_"+ID).val();
+    var type=$("#type_input_"+ID).val();
+    var avail=$("#avail_input_"+ID).val();
+    var date=$("#date_input_"+ID).val();
+    var dataString = 'assest_id='+ID+'&equipment_name='+name+'&equipment_type='+type+'&availability='+avail+'&date_acquired='+date;
+  
+    $("#edit_"+ID).show();
+    $("#name_"+ID).show();
+    $("#type_"+ID).show();
+    $("#date_"+ID).show();
+    $("#done_"+ID).hide();
+    $("#del_"+ID).hide();
+    $("#name_input_"+ID).hide();
+    $("#type_input_"+ID).hide();
+    $("#date_input_"+ID).hide();
+
+    if(name.length > 0){
+      $.ajax({
+      type: "POST",
+      url: "edit.php",
+      data: dataString,
+      cache: false,
+      success: function(html){
+        $("#name_"+ID).html(name);
+        $("#type_"+ID).html(type);
+        $("#avail_"+ID).html(avail);
+        $("#date_"+ID).html(date);
+      }
+      });
+    }else{
+      alert('Enter something.');
+    }
+
+  });
+
+  $(".delbutton").click(function(){
+    var ID=$(this).attr('name');
+    var dataString = 'assest_id='+ID;
+    $.ajax({
+      type: "POST",
+      url: "delete.php",
+      data: dataString,
+      cache: false
+      });
+    $("#row_"+ID).remove();
+  });
+
+});
 </script>
 </body>
 </html>

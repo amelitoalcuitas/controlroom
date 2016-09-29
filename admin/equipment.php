@@ -14,6 +14,7 @@ $userin = $_SESSION["name"];
 <!DOCTYPE html>
 <html>
 <head>
+<title> Equipment List </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Tell the browser to be responsive to screen width -->
@@ -31,6 +32,13 @@ $userin = $_SESSION["name"];
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
 
 <script type="text/javascript">
@@ -40,13 +48,13 @@ $userin = $_SESSION["name"];
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-<header class="main-header">
+  <header class="main-header">
     <?php include "siteheader.php"; ?>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+    <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
@@ -101,9 +109,8 @@ $userin = $_SESSION["name"];
             <span>Scan</span>
           </a>
         </li>
-        </ul>
-      </ul>
-    </section>
+
+            </section>
     <!-- /.sidebar -->
   </aside>
 
@@ -137,6 +144,7 @@ $userin = $_SESSION["name"];
                 <tr>
                   
                   <th>Equipment ID</th>
+                  <th>Equipment Image</th>
                   <th>Equipment Name</th>
                   <th>Equipment Type</th>
                   <th>Availability</th>
@@ -159,10 +167,15 @@ $userin = $_SESSION["name"];
                             if ($result->num_rows > 0) {
 
                              while($row = $result->fetch_assoc()) {
+                              $image_name=$row["img_name"];
+                              $image_path=$row["img_path"];
                                 ?>
                                 <tr id="row_<?php echo $row['assest_id'];?>">
                                   <td style="width:110px"> 
                                     <span id="id_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['assest_id'];?> </span>
+                                  </td>
+                                  <td> 
+                                    <img src="<?php echo $image_path; ?><?php echo $image_name; ?>" alt="<?php echo $image_name; ?>" width="200">
                                   </td>
                                   <td> 
                                     <span id="name_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['equipment_name'];?> </span>
@@ -419,7 +432,7 @@ $userin = $_SESSION["name"];
               </button>
               <h4 class="modal-title" id="myModalLabel">Add Equipment</h4>
             </div>
-            <form role="form" action = "add_equip.php" method ="post" >
+            <form role="form" action = "add_equip.php" method ="post" enctype="multipart/form-data">
               <div class="modal-body">
                 
                 <div class="form-group">
@@ -452,12 +465,12 @@ $userin = $_SESSION["name"];
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">Equipment Picture</label>
-                  <input type="file" id="exampleInputFile">
+                  <input type="file" name="eqp_img">
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" name = "RegisterEquip"class="btn btn-primary" >Add</button>
+                <button type="submit" name = "RegisterEquip"class="btn btn-primary">Add</button>
               </div>
             </form>
           </div>
@@ -486,7 +499,7 @@ $userin = $_SESSION["name"];
 
     <!-- MODAL START -->
       <div class="modal fade" id="viewpending" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">

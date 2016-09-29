@@ -1,20 +1,22 @@
 <?php require 'connection.php' ?>
+
 <?php
 session_start();
 
 if(isset($_SESSION["user"]))
 {
-$userin = $_SESSION["user"];
+$userin = $_SESSION["name"];
 
 } else {
 
-    header('Location: C_admin.php');
+    header('Location: ../index.html');
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
+  <title> Reservation </title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -48,132 +50,7 @@ $userin = $_SESSION["user"];
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Logo -->
-    <a href="index.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>C</b>R</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Control</b>Room</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          
-          <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 9 tasks</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Design some buttons
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Create a nice theme
-                        <small class="pull-right">40%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">40% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Some task I need to do
-                        <small class="pull-right">60%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Make beautiful transitions
-                        <small class="pull-right">80%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">80% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                </ul>
-              </li>
-              <li class="footer">
-                <a href="#">View all tasks</a>
-              </li>
-            </ul>
-          </li>
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $userin;?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                   <?php echo $userin ; ?> - Admin
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-right">
-                  <a href="C_admin_logout.php" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <?php include "siteheader.php"; ?>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
@@ -236,7 +113,7 @@ $userin = $_SESSION["user"];
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Equipment List
+        Reservation
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.html"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -309,10 +186,10 @@ $userin = $_SESSION["user"];
           </div>
           <div class="col-md-7 col-md-offset-0"> 
            <div  class="box box-primary">
-<table id="example1" class="table table-bordered table-striped">
-    <th>Equipments</th>
-    <th> quantity </th>
-      <?php
+              <table id="example1" class="table table-bordered table-striped">
+              <th>Equipments</th>
+              <th> Quantity </th>
+                <?php
 
                    if ($resultpending->num_rows > 0){
                    
@@ -321,18 +198,16 @@ $userin = $_SESSION["user"];
                  {
                   ?>
                   <tr>
-                <td> <?php echo $row['equipment_name'];?> </td>
-                 <td></td>
-                </tr>
-              <?php } 
-                
-               }
-            echo $code;
-            }
-             ?>
-            
-             
-      </table>
+                    <td> <?php echo $row['equipment_name'];?> </td>
+                     <td><?php echo $row['equipment_name'];?></td>
+                    </tr>
+                  <?php } 
+                    
+                   }
+                //echo $code;
+                }
+               ?>
+              </table>
       </div>
           </div>
           <div class="col-md-7 col-md-offset-0"> 
