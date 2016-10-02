@@ -161,10 +161,18 @@ $userin = $_SESSION["user"];
                 <h3 class="box-title">Equipments </h3>
               </div>
               <div class="box-body">
-
-          <div id="txtHint">
-            
-          </div>
+                <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th> </th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody id="txtHint">
+                  
+                </tbody>
+                </table>
 
 
                  <!-- TABLE-->
