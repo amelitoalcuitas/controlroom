@@ -91,6 +91,14 @@ $userin = $_SESSION["name"];
           </a>
         </li>
 
+         <li class="treeview">
+          <a href="new_admin.php">
+            <i class="fa fa-user"></i>
+            <span>New Admin</span>
+          </a>
+        </li>
+
+
             </section>
     <!-- /.sidebar -->
   </aside>

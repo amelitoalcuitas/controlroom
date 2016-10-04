@@ -85,6 +85,13 @@ $userin = $_SESSION["name"];
             <span>Scan</span>
           </a>
         </li>
+
+         <li class="treeview">
+          <a href="new_admin.php">
+            <i class="fa fa-user"></i>
+            <span>New Admin</span>
+          </a>
+        </li>
         </ul>
     </section>
     <!-- /.sidebar -->

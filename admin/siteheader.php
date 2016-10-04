@@ -40,7 +40,7 @@
                <?php
                   }
                 }
-            ?>
+            ?>  
               <span class="hidden-xs"><?php echo $userin ?></span>
             </a>
             <ul class="dropdown-menu">
