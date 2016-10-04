@@ -25,8 +25,26 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="User_images/me.jpg" class="img-circle" alt="User Image">
+
+              <?php
+
+            $profile = "SELECT * FROM student WHERE student_id = '".$userid."' ";
+            $profileresult = $dbCon->query($profile);
+           
+
+            if($profileresult->num_rows > 0)
+            {
+             while($profilerow = $profileresult->fetch_assoc()) {
+                  $image_name=$profilerow["img_name"];
+                  $image_path=$profilerow["img_path"];
+                 ?>
+
+                <img src="<?php echo $image_path; ?><?php echo $image_name; ?>" alt="<?php echo $image_name; ?>" class="img-circle">
                
+               <?php
+                  }
+                }
+            ?>
                 <p>
                   <?php echo $userin; ?>
                    <br> Student
