@@ -586,6 +586,7 @@ $(function(){
         success: function(html){
           $("#user1").html(user1);
           $("#pass1").html(pass1);
+          alert("Information Saved!");
         }
         });
       }else{
