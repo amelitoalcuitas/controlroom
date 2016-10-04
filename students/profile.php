@@ -165,7 +165,7 @@ $userin = $_SESSION["user"];
 
             <div class="form-group">
               <form role="form" action = "changepicture.php" method ="post" enctype="multipart/form-data">
-              <input type="file" name="profile_img">
+              <input type="file" name="profile_img" required>
             </div>
 
              <div class="modal-footer">
@@ -429,8 +429,6 @@ $userin = $_SESSION["user"];
                 </div>
                 <div class="box-body">
                   <!-- Main content -->      
-                  <div class="box-header">
-                  </div>
                   <!-- /.box-header -->
                     <?php
                       $conn = $dbCon;
@@ -456,7 +454,7 @@ $userin = $_SESSION["user"];
                                     WHERE equipment_reserved.status = 'approved'";
                         $approvedID = $conn->query($approved);
                         $approvedID2 = $conn->query($approved);
-                                           
+
                         if($approvedID->num_rows > 0){
                           $row = $approvedID->fetch_assoc();
                           echo "<div class= 'content'>";
