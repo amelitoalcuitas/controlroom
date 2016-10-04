@@ -140,7 +140,7 @@ $userin = $_SESSION["user"];
                       <label>
                         <button type = "button" id = "cpass" class = "btn btn-success" name = "ChangePass"> Change Password </button>
                         <button style="display:none;" type="button" class="donebutton btn btn-success" id="donebutt"> <span class="fa fa-check"></span> </button>
-                        <button style="display:none;" type="button" class="delbutton btn btn-danger" id="delbutt"> <span class="fa fa-trash"></span> </button>
+                        <button style="display:none;" type="button" class="delbutton btn btn-danger" id="delbutt"> <span class="fa fa-times"></span> </button>
                       </label>
                     </div>
                   </div>
@@ -545,8 +545,6 @@ $(function(){
       var pword = document.getElementById('pass1').value;
       var id =  document.getElementById('studentID').value;
       var dataString = 'username='+uname+'&password='+pword+'&id='+id;
-      
-      alert(uname + " " + pword + " " + id);
 
       if(uname.length > 0 && pword.length > 0){
         $.ajax({
