@@ -84,7 +84,7 @@ $userin = $_SESSION["user"];
             My Profile
           </h1>
           <ol class="breadcrumb">
-            <li><a href="index.html"><i class="fa fa-camera"></i> Home</a></li>
+            <li><a href="dashboard.php"><i class="fa fa-camera"></i> Home</a></li>
             <li class="active">Profile</li>
           </ol>
         </section>
