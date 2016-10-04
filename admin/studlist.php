@@ -75,9 +75,9 @@ $userin = $_SESSION["name"];
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#" data-toggle="modal" data-target="#viewpending"><i class="fa fa-circle-o"></i>  View Pending Request</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#viewapproved"><i class="fa fa-circle-o"></i> View Approved</a></li>
-            <li><a href="studlist.php"><i class="fa fa-circle-o"></i> Student List</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#viewpending"><i class="fa fa-arrows-alt"></i>  View Pending Request</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#viewapproved"><i class="fa fa-arrows-alt"></i> View Approved</a></li>
+            <li class="active"><a href="studlist.php"><i class="fa fa-circle-o"></i> Student List</a></li>
           </ul>
         </li>
 
