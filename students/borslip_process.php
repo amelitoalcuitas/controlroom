@@ -9,6 +9,7 @@
                     $studId = $_POST['studId'];
                   	
                     $equip = $_POST['database'];
+                    $qty = $_POST['qtydata'];
 
                     $datebor = $_POST['datebor'];
                   	$bortime = $_POST['bortime'];
@@ -20,11 +21,18 @@
 
                    $counter = count($equip);
                     
-
+                   $i = 0;
                    foreach($equip as $equips)
                   {
-                          $sql1 = $dbCon->query("INSERT INTO equipment_reserved (equip_id,reservation_code,stud_id, date_borrowed, expected_date_return,status) values ('{$equips}','{$reservecode}','{$studId}', '{$datetimebor}','{$retdateret}','unapproved')");
+                   
+                    echo $equips."-".$qty[$i]."<br>";
 
+                           $sql1 = $dbCon->query("INSERT INTO equipment_reserved (equip_id,qty,reservation_code,stud_id, date_borrowed, expected_date_return,status) values ('{$equips}','{$qty[$i]}','{$reservecode}','{$studId}', '{$datetimebor}','{$retdateret}','unapproved')");
+                            
+                            $sql2 = $dbCon->query("UPDATE equipment SET qty = (qty-$qty[$i]) WHERE assest_id = $equips");
+
+
+                    $i++;
                   }
                   // 	for ($x=0;$x<$counter;$x++)
                   // 	{     
@@ -36,10 +44,10 @@
                 	 // }
 
 
-				  echo '<script language="javascript">';
-				 echo 'alert("success")';
-			   header("Refresh: 0; url= borslip.php");
-				echo '</script>';
+		    echo '<script language="javascript">';
+				echo 'alert("success")';
+			  header("Refresh: 0; url= borslip.php");
+			  echo '</script>';
 
 
 			}
