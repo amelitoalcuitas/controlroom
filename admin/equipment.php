@@ -454,7 +454,7 @@ $userin = $_SESSION["name"];
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">Equipment Picture</label>
-                  <input type="file" name="eqp_img">
+                  <input type="file" name="eqp_img" required>
                 </div>
               </div>
               <div class="modal-footer">

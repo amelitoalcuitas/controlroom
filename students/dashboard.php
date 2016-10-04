@@ -99,11 +99,11 @@ $userin = $_SESSION["user"];
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>Equipment Image</th>
                   <th>Equipment Name</th>
                   <th>Equipment Type</th>
                   <th>Availability</th>
                   <th>Equipment Serial</th>
-                  <th> </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -111,6 +111,7 @@ $userin = $_SESSION["user"];
                 <!--connection to database-->
                        <?php
                           $conn = $dbCon;
+
                     if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                             } 
@@ -121,9 +122,13 @@ $userin = $_SESSION["user"];
                             if ($result->num_rows > 0) {
 
                              while($row = $result->fetch_assoc()) {
+                                $image_name=$row["img_name"];
+                                $image_path=$row["img_path"];
                                 ?>
-                                <tr id="row_<?php echo $row['assest_id'];?>">
-                                 
+                                <tr id="row_<?php echo $row['assest_id'];?>">   
+                                  <td> 
+                                    <?php echo '<img src=http://localhost/controlroom/admin/photo/'.$image_name.' width="200">'; ?>
+                                  </td>   
                                   <td> 
                                     <span id="name_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['equipment_name'];?> </span>
                                     <input type="text" class="inpt" id="name_input_<?php echo $row['assest_id'];?>" value="<?php echo $row['equipment_name'];?>" style="display:none;">
@@ -142,7 +147,6 @@ $userin = $_SESSION["user"];
                                   </td>
                                   
                                   <td> 
-                                    <input type="button" class="editbutton btn btn-primary" id="edit_<?php echo $row['assest_id'];?>" name="<?php echo $row['assest_id'];?>" value="View" data-toggle = "modal" data-target = "#myModal">
                                     <button style="display:none;" type="button" class="donebutton btn btn-success" id="done_<?php echo $row['assest_id'];?>" name="<?php echo $row['assest_id'];?>"> <span class="fa fa-check"> </span> </button>
                                     <button style="display:none;" type="button" class="delbutton btn btn-danger" id="del_<?php echo $row['assest_id'];?>" name="<?php echo $row['assest_id'];?>"> <span class="fa fa-trash"> </span> </button>
                                   </td> 
