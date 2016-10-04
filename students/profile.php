@@ -105,12 +105,14 @@ $userin = $_SESSION["user"];
 
             if($profileresult->num_rows > 0)
             {
-             while($profilerow = $profileresult->fetch_assoc())
-              {
+             while($profilerow = $profileresult->fetch_assoc()) {
+                  $image_name=$profilerow["img_name"];
+                  $image_path=$profilerow["img_path"];
                  ?>
 
                   <div class="col-md-1 col-md-offset-2">
-                    <img src = "User_images/me.jpg" class = "thumbnail" width="300" height = "300">
+                                    <img class = "thumbnail" src="<?php echo $image_path; ?><?php echo $image_name; ?>" alt="<?php echo $image_name; ?>" width="300" height="300">
+                    <!--<img src = "user_images/default.jpg" class = "thumbnail" width="300" height = "300">-->
                   </div>
                   <!-- Student Id-->    
                   <div class="form-group">
@@ -136,8 +138,9 @@ $userin = $_SESSION["user"];
                     <input type="password" id="pass1" class="form-control" value="" readonly>
                   </div>       
                   <div class="form-group">
-                    <div class="col-sm-offset-8 col-sm-8">
+                    <div class="col-sm-offset-4 col-sm-8">
                       <label>
+                      <button type = "button" data-toggle="modal" data-target="#myModal" class = "btn btn-primary" name = "ChangePic"> Change Picture </button>
                         <button type = "button" id = "cpass" class = "btn btn-success" name = "ChangePass"> Change Password </button>
                         <button style="display:none;" type="button" class="donebutton btn btn-success" id="donebutt"> <span class="fa fa-check"></span> </button>
                         <button style="display:none;" type="button" class="delbutton btn btn-danger" id="delbutt"> <span class="fa fa-times"></span> </button>
@@ -147,6 +150,35 @@ $userin = $_SESSION["user"];
                 <!-- /.box-body -->
                 </div>
               </div>
+
+ <!-- MODAL START -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Change Picture</h4>
+            </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <form role="form" action = "changepicture.php" method ="post" enctype="multipart/form-data">
+              <input type="file" name="profile_img">
+            </div>
+
+             <div class="modal-footer">
+               <button type="submit" name = "changepicture" class="btn btn-primary">Upload</button>
+             </div>
+
+              </form>
+          </div>
+          </div>
+        </div>
+      </div>
+    <!-- MODAL END -->
+
                <?php
                   }
                 }
