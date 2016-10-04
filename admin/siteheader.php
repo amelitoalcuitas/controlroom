@@ -23,16 +23,50 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+            <?php
+                      $userid = $_SESSION["user"];
+            $profile = "SELECT * FROM admin WHERE admin_id = $userid";
+            $profileresult = $dbCon->query($profile);
+           
+
+            if($profileresult->num_rows > 0)
+            {
+             while($profilerow = $profileresult->fetch_assoc()) {
+                  $image_name=$profilerow["img_name"];
+                  $image_path=$profilerow["img_path"];
+                 ?>
+                <img class="user-image" src="<?php echo $image_path; ?><?php echo $image_name; ?>" alt="<?php echo $image_name; ?>" class="img-circle">
+               
+               <?php
+                  }
+                }
+            ?>
               <span class="hidden-xs"><?php echo $userin ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                
+                      <?php
+                      $userid = $_SESSION["user"];
+            $profile = "SELECT * FROM admin WHERE admin_id = $userid";
+            $profileresult = $dbCon->query($profile);
+           
 
+            if($profileresult->num_rows > 0)
+            {
+             while($profilerow = $profileresult->fetch_assoc()) {
+                  $image_name=$profilerow["img_name"];
+                  $image_path=$profilerow["img_path"];
+                 ?>
+                <img src="<?php echo $image_path; ?><?php echo $image_name; ?>" alt="<?php echo $image_name; ?>" class="img-circle">
+               
+               <?php
+                  }
+                }
+            ?>
                 <p>
-                   <?php echo $userin ; ?> - Admin
+                   <?php echo $userin; ?> - Admin
                 </p>
               </li>
               <!-- Menu Body -->
