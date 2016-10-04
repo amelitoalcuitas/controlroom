@@ -456,10 +456,7 @@ $userin = $_SESSION["user"];
                                     WHERE equipment_reserved.status = 'approved'";
                         $approvedID = $conn->query($approved);
                         $approvedID2 = $conn->query($approved);
-
-                        echo $idRow['reservation_code'] . "<br>" . $userid;  
-                
-                   
+                                           
                         if($approvedID->num_rows > 0){
                           $row = $approvedID->fetch_assoc();
                           echo "<div class= 'content'>";
