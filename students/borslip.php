@@ -167,6 +167,7 @@ $userin = $_SESSION["user"];
                   <th> </th>
                   <th>Name</th>
                   <th>Quantity</th>
+                  <th> </th>
                 </tr>
                 </thead>
                 <tbody id="txtHint">
@@ -340,7 +341,7 @@ $userin = $_SESSION["user"];
           <td> <?php echo $row['remarks'];?></td> 
           <td> <input type="number" class="form-control text-center" id="qty_<?php echo $row['assest_id'];?>" value = "<?php echo $row['qty']; ?>" min = "1" max = "<?php echo $row['qty'];?>" style="width:60px"></td>
           <td> 
-          <button type = "button" data-dismiss="modal" class ="addbtn btn btn-success" value="<?php echo $row['assest_id'];?>" onclick="showUser(this.value)">Add Product </button></td>
+          <button type = "button" data-dismiss="modal" class ="addbtn btn btn-success" value="<?php echo $row['assest_id'];?>" onclick="showUser(this.value,document.getElementById('qty_<?php echo $row['assest_id'];?>').value)">Add Product </button></td>
           </form>
               
           </tr>
@@ -422,7 +423,7 @@ var equip_num = "";
 
  <script>
 
-function showUser(str) {
+function showUser(str,qty) {
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
         return;
@@ -439,7 +440,7 @@ function showUser(str) {
                 document.getElementById("txtHint").innerHTML += xmlhttp.responseText;
             }
         };
-        xmlhttp.open("GET","test.php?q="+str,true);
+        xmlhttp.open("GET","test.php?q="+str+"&qty="+qty,true);
         xmlhttp.send();
     }
 }
