@@ -572,6 +572,7 @@ $(function(){
       var pword = document.getElementById('pass1').value;
       var id =  document.getElementById('studentID').value;
       var dataString = 'username='+uname+'&password='+pword+'&id='+id;
+      alert(id + " " + pword + " " + uname);
 
       if(uname.length > 0 && pword.length > 0){
         $.ajax({
@@ -584,6 +585,7 @@ $(function(){
           $("#pass1").html(pass1);
         }
         });
+        alert("Information saved!");
       }else{
         alert('Enter something.');
       }
