@@ -12,9 +12,6 @@ if(isset($_POST['login']))
     $sqladmin = "SELECT * from admin WHERE admin_username = '".$username."' AND admin_password = '".$password."'";
     $result = $dbCon->query($sqladmin);
 
-    $sqlstudent = "SELECT * from student WHERE username = '".$username."' AND password = '".$password."' AND student_status!='blocked'";
-			    $result2 = $dbCon->query($sqlstudent);
-
     if($result->num_rows > 0 )
 	    {
 	    	session_start();
@@ -23,17 +20,21 @@ if(isset($_POST['login']))
 	    	$_SESSION['name'] = $row['admin_name'];
 	    	 header("Location: admin/dashboard.php");
 	    } 
+
+    $sqlstudent = "SELECT * from student WHERE username = '".$username."' AND password = '".$password."' AND student_status!='blocked'";
+	$result2 = $dbCon->query($sqlstudent);
+
    
-	else if($result2->num_rows > 0)
+  if($result2->num_rows > 0)
 	    {
 			session_start();
 	    	$row2 = $result2->fetch_assoc();
 	    	 $_SESSION['studid'] = $row2['student_id'];
 	    	 $_SESSION['user'] = $row2['student_name'];
-	    	header("Location: students/dashboard.php");
+	    	 header("Location: students/dashboard.php");
 	    }
 
- 	else 
+   if($result2->num_rows == 0)
  		{
 	    	echo '<script language="javascript">';
             echo 'alert("Wrong Information!")';
