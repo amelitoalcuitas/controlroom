@@ -5,7 +5,7 @@ if(isset($_POST['login']))
 {
 
 	$username = $_POST['username'];
-	$password = $_POST['password'];
+	$password = md5($_POST['password']);
 
 	$dbCon = mysqli_connect("localhost", "root", "", "controlroom");
 
