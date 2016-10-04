@@ -419,10 +419,6 @@ var equip_num = "";
     $("#section_"+id).remove();
   }
 
-</script>
-
- <script>
-
 function showUser(str,qty) {
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
