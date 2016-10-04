@@ -9,7 +9,7 @@
                       $course = $_POST['course'];
                       $year = $_POST['year'];
                       $username = $_POST['username'];
-                      $password = $_POST['password'];
+                      $password = md5($_POST['password']);
                       $number = $_POST['number'];
                       $email = $_POST['email'];
 
