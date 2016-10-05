@@ -91,7 +91,7 @@ $userin = $_SESSION["user"];
         Forms
       </h1>
       <ol class="breadcrumb">
-        <li><a href="dashboard.php"><i class="fa fa-camera"></i> Home</a></li>
+        <li><a href="index.html"><i class="fa fa-camera"></i> Home</a></li>
         <li class="active">Forms</li>
         <li class="active">Borrower's Slip</li>
       </ol>
@@ -439,11 +439,7 @@ function showUser(str,qty) {
         xmlhttp.open("GET","test.php?q="+str+"&qty="+qty,true);
         xmlhttp.send();
     }
-
-    if
 }
-
-
 </script>
 </body>
 </html>

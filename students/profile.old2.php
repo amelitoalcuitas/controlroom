@@ -84,7 +84,7 @@ $userin = $_SESSION["user"];
             My Profile
           </h1>
           <ol class="breadcrumb">
-            <li><a href="dashboard.php"><i class="fa fa-camera"></i> Home</a></li>
+            <li><a href="index.html"><i class="fa fa-camera"></i> Home</a></li>
             <li class="active">Profile</li>
           </ol>
         </section>
@@ -293,9 +293,9 @@ $userin = $_SESSION["user"];
                                           student.student_year,
                                           equipment.equipment_name
                                   from equipment_reserved
-                                  JOIN student ON student.student_id = equipment_reserved.stud_id
+                                  JOIN student ON student.student_id = $userid
                                   JOIN equipment ON equipment.assest_id = equipment_reserved.equip_id
-                                  WHERE equipment_reserved.status = 'unapproved' AND equipment_reserved.stud_id = $userid AND equipment_reserved.reservation_code = '".$idRow['reservation_code']."' ";
+                                  WHERE equipment_reserved.status = 'unapproved' AND equipment_reserved.reservation_code = '".$idRow['reservation_code']."' ";
                     $resultpending = $conn->query($sqlpending);
                     $resultpending2 = $conn->query($sqlpending);
                     $row2 = $resultpending2->fetch_assoc();
@@ -438,27 +438,23 @@ $userin = $_SESSION["user"];
 
                       while($idRow = $result->fetch_assoc()){
                         $idRow['reservation_code'];
-                        
-                        $approved = "SELECT equipment_approved.reservation_code,
-                        equipment_reserved.equip_id,
-                        equipment_reserved.stud_id,
-                        equipment_reserved.reservation_id,
-                        equipment_reserved.date_borrowed,
-                        equipment_reserved.expected_date_return,
-                        student.student_name,
-                        student.student_course,
-                        student.student_year,
-                        equipment.equipment_name
-                        FROM equipment_approved
-                        JOIN equipment_reserved ON equipment_reserved.reservation_code = equipment_approved.reservation_code
-                        JOIN equipment ON equipment.assest_id = equipment_reserved.equip_id
-                        JOIN student ON student.student_id = equipment_reserved.stud_id 
-                        WHERE equipment_reserved.stud_id = $userid AND equipment_reserved.reservation_code = '".$idRow['reservation_code']."'
-                        ";
-
+                        $approved = "SELECT equipment_reserved.reservation_code,
+                                            equipment_reserved.equip_id,
+                                            equipment_reserved.stud_id,
+                                            equipment_reserved.reservation_id,
+                                            equipment_reserved.date_borrowed,
+                                            equipment_reserved.expected_date_return,
+                                            student.student_name,
+                                            student.student_course,
+                                            student.student_year,
+                                            equipment.equipment_name
+                                    from equipment_reserved
+                                    JOIN equipment ON equipment.assest_id = equipment_reserved.equip_id
+                                    JOIN student ON student.student_id = $userid
+                                    WHERE equipment_reserved.status = 'approved'";
                         $approvedID = $conn->query($approved);
                         $approvedID2 = $conn->query($approved);
-                                           
+
                         if($approvedID->num_rows > 0){
                           $row = $approvedID->fetch_assoc();
                           echo "<div class= 'content'>";
@@ -576,6 +572,7 @@ $(function(){
       var pword = document.getElementById('pass1').value;
       var id =  document.getElementById('studentID').value;
       var dataString = 'username='+uname+'&password='+pword+'&id='+id;
+      alert(id + " " + pword + " " + uname);
 
       if(uname.length > 0 && pword.length > 0){
         $.ajax({
@@ -586,9 +583,9 @@ $(function(){
         success: function(html){
           $("#user1").html(user1);
           $("#pass1").html(pass1);
-          alert("Information Saved!");
         }
         });
+        alert("Information saved!");
       }else{
         alert('Enter something.');
       }
