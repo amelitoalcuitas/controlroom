@@ -16,8 +16,6 @@
 
       	$sql = "SELECT * FROM equipment WHERE assest_id = '$q'";
 
-        $sql2 = $dbCon->query("UPDATE equipment SET qty = (qty-$qty) WHERE assest_id = $q");
-
 
       	$result = $conn->query($sql);
 

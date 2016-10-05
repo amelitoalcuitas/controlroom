@@ -337,11 +337,11 @@ $userin = $_SESSION["user"];
           <td> <?php echo $row['equipment_name'];?> </td>
           <td> <?php echo $row['equipment_type'];?> </td>
           <td> <?php echo $row['brand_model'];?></td> 
-          <td> <?php echo $row['qty'];?> </td>
+          <td id="qtyrow_<?php echo $row['assest_id'] ?>"> <?php echo $row['qty'];?> </td>
           <td> <?php echo $row['remarks'];?></td> 
           <td> <input type="number" class="form-control text-center" id="qty_<?php echo $row['assest_id'];?>" value = "<?php echo $row['qty']; ?>" min = "1" max = "<?php echo $row['qty'];?>" style="width:60px"></td>
           <td> 
-          <button type = "button" data-dismiss="modal" class ="addbtn btn btn-success" value="<?php echo $row['assest_id'];?>" onclick="showUser(this.value,document.getElementById('qty_<?php echo $row['assest_id'];?>').value)">Add Product </button></td>
+          <button type = "button" data-dismiss="modal" class ="addbtn btn btn-success" value="<?php echo $row['assest_id'];?>" onclick="showUser(this.value,document.getElementById('qty_<?php echo $row['assest_id'];?>').value); deplete(this.value);">Add Product </button></td>
           </form>
               
           </tr>
@@ -403,6 +403,7 @@ $userin = $_SESSION["user"];
 var cnt = 0;
 var clickid = "";
 var equip_num = "";
+var idnum = "";
 
   $(function () {
     $('#example1').DataTable({
@@ -420,6 +421,8 @@ var equip_num = "";
   }
 
 function showUser(str,qty) {
+  idnum = str;
+  if(document.getElementById("qty_"+str).value > 0){
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
         return;
@@ -438,11 +441,17 @@ function showUser(str,qty) {
         };
         xmlhttp.open("GET","test.php?q="+str+"&qty="+qty,true);
         xmlhttp.send();
+      }
     }
+  }
 
-    if
+function deplete(id){
+  var currentqty = document.getElementById("qtyrow_"+id).innerHTML;
+  var quantity = document.getElementById("qty_"+id).value;
+  var newMax = document.getElementById("qtyrow_"+id).innerHTML = parseInt(currentqty) - quantity;
+  document.getElementById("qty_"+id).max = newMax;
+  document.getElementById("qty_"+id).value = newMax;
 }
-
 
 </script>
 </body>
