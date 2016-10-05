@@ -339,8 +339,8 @@ $userin = $_SESSION["user"];
           <td> <?php echo $row['brand_model'];?></td> 
           <td id="qtyrow_<?php echo $row['assest_id'] ?>"> <?php echo $row['qty'];?> </td>
           <td> <?php echo $row['remarks'];?></td> 
-          <td> <input type="number" class="form-control text-center" id="qty_<?php echo $row['assest_id'];?>" value = "<?php echo $row['qty']; ?>" min = "1" max = "<?php echo $row['qty'];?>" style="width:60px"></td>
-          <td> 
+          <td> <input type="number" class="form-control text-center" id="qty_<?php echo $row['assest_id'];?>" value = "1" min = "0" max = "<?php echo $row['qty'];?>" style="width:60px"></td>
+          <td>
           <button type = "button" data-dismiss="modal" class ="addbtn btn btn-success" value="<?php echo $row['assest_id'];?>" onclick="showUser(this.value,document.getElementById('qty_<?php echo $row['assest_id'];?>').value); deplete(this.value);">Add Product </button></td>
           </form>
               
@@ -416,42 +416,51 @@ var idnum = "";
     });
   });
 
-  function deleteThis(id){
-    $("#section_"+id).remove();
-  }
-
-function showUser(str,qty) {
-  idnum = str;
-  if(document.getElementById("qty_"+str).value > 0){
-    if (str == "") {
-        document.getElementById("txtHint").innerHTML = "";
-        return;
-    } else { 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("txtHint").innerHTML += xmlhttp.responseText;
-            }
-        };
-        xmlhttp.open("GET","test.php?q="+str+"&qty="+qty,true);
-        xmlhttp.send();
+  function showUser(str,qty) {
+    idnum = str;
+    if(document.getElementById("qty_"+str).value > 0){
+      if (str == "") {
+          document.getElementById("txtHint").innerHTML = "";
+          return;
+      } else { 
+          if (window.XMLHttpRequest) {
+              // code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp = new XMLHttpRequest();
+          } else {
+              // code for IE6, IE5
+              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.onreadystatechange = function() {
+              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                  document.getElementById("txtHint").innerHTML += xmlhttp.responseText;
+              }
+          };
+          xmlhttp.open("GET","test.php?q="+str+"&qty="+qty,true);
+          xmlhttp.send();
       }
     }
   }
 
-function deplete(id){
-  var currentqty = document.getElementById("qtyrow_"+id).innerHTML;
-  var quantity = document.getElementById("qty_"+id).value;
-  var newMax = document.getElementById("qtyrow_"+id).innerHTML = parseInt(currentqty) - quantity;
-  document.getElementById("qty_"+id).max = newMax;
-  document.getElementById("qty_"+id).value = newMax;
-}
+  function deleteThis(id,qty){
+    var currQty = document.getElementById("qtyrow_"+id).innerHTML;
+    var newQty = parseInt(qty) + parseInt(currQty);
+    document.getElementById("qty_"+id).max = newQty;
+    document.getElementById("qtyrow_"+id).innerHTML = newQty;
+    document.getElementById("qty_"+id).value = 1;
+    $("#section_"+id).remove();
+  }
+
+  function deplete(id){
+    var currentqty = document.getElementById("qtyrow_"+id).innerHTML;
+    var quantity = document.getElementById("qty_"+id).value;
+    var newMax = document.getElementById("qtyrow_"+id).innerHTML = parseInt(currentqty) - quantity;
+    document.getElementById("qty_"+id).max = newMax;
+    if(newMax == 0){
+      document.getElementById("qty_"+id).value = 0;
+    }else if(quantity > newMax){
+      document.getElementById("qty_"+id).value = 1;
+    }
+  }
 
 </script>
 </body>
