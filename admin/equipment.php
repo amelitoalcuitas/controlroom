@@ -116,6 +116,8 @@ $userin = $_SESSION["name"];
       </ol>
     </section>
 
+
+
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -204,9 +206,9 @@ $userin = $_SESSION["name"];
       </div>
       <!-- /.row -->
     </section>
-    <!-- /.content -->
 
     
+    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
