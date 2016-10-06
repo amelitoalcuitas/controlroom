@@ -418,11 +418,11 @@ var idnum = "";
 
   function showUser(str,qty) {
     idnum = str;
-    if(document.getElementById("qty_"+str).value > 0){
+    if(!document.getElementById("section_"+str)){
       if (str == "") {
           document.getElementById("txtHint").innerHTML = "";
           return;
-      } else { 
+      } else{ 
           if (window.XMLHttpRequest) {
               // code for IE7+, Firefox, Chrome, Opera, Safari
               xmlhttp = new XMLHttpRequest();
@@ -438,15 +438,18 @@ var idnum = "";
           xmlhttp.open("GET","test.php?q="+str+"&qty="+qty,true);
           xmlhttp.send();
       }
+    }else{
+      var currentVal = document.getElementById('qtyinput_'+str).value;
+      var addVal = document.getElementById('qty_'+str).value
+      var newVal = +currentVal + +addVal;
+      document.getElementById('qtyinput_'+str).value = newVal;
     }
   }
 
-  function deleteThis(id,qty){
-    var currQty = document.getElementById("qtyrow_"+id).innerHTML;
-    var newQty = parseInt(qty) + parseInt(currQty);
-    document.getElementById("qty_"+id).max = newQty;
-    document.getElementById("qtyrow_"+id).innerHTML = newQty;
-    document.getElementById("qty_"+id).value = 1;
+  function deleteThis(id,realQty){
+    document.getElementById("qtyrow_"+id).innerHTML = realQty;
+    document.getElementById('qty_'+id).max = realQty;
+    document.getElementById('qty_'+id).value = 1;
     $("#section_"+id).remove();
   }
 
@@ -460,6 +463,7 @@ var idnum = "";
     }else if(quantity > newMax){
       document.getElementById("qty_"+id).value = 1;
     }
+
   }
 
 </script>

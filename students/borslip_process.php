@@ -30,8 +30,6 @@
                            $sql1 = $dbCon->query("INSERT INTO equipment_reserved (equip_id,qty,reservation_code,stud_id, date_borrowed, expected_date_return,status) values ('{$equips}','{$qty[$i]}','{$reservecode}','{$studId}', '{$datetimebor}','{$retdateret}','unapproved')");
                             
                             //$sql2 = $dbCon->query("UPDATE equipment SET qty = (qty-$qty[$i]) WHERE assest_id = $equips");
-
-
                     $i++;
                   }
                   // 	for ($x=0;$x<$counter;$x++)
