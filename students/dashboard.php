@@ -144,11 +144,6 @@ $userin = $_SESSION["user"];
                                     <span id="type_<?php echo $row['assest_id'];?>" class="text"> <?php echo $row['equipment_serial'];?> </span>
                                     <input type="text" class="inpt" id="type_input_<?php echo $row['assest_id'];?>" value="<?php echo $row['equipment_type'];?>" style="display:none;">
                                   </td>
-                                  
-                                  <td> 
-                                    <button style="display:none;" type="button" class="donebutton btn btn-success" id="done_<?php echo $row['assest_id'];?>" name="<?php echo $row['assest_id'];?>"> <span class="fa fa-check"> </span> </button>
-                                    <button style="display:none;" type="button" class="delbutton btn btn-danger" id="del_<?php echo $row['assest_id'];?>" name="<?php echo $row['assest_id'];?>"> <span class="fa fa-trash"> </span> </button>
-                                  </td> 
                                 </tr>
 
                         <?php
