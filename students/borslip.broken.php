@@ -161,7 +161,7 @@ $userin = $_SESSION["user"];
                 <h3 class="box-title">Equipments </h3>
               </div>
               <div class="box-body">
-                <table class="table table-bordered table-striped" id="itemTable">
+                <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th> </th>
@@ -334,14 +334,14 @@ $userin = $_SESSION["user"];
        while($row = $result->fetch_assoc()) {
           ?>
           <tr>
-          <td id="equipname_<?php echo $row['assest_id'] ?>"> <?php echo $row['equipment_name'];?> </td>
+          <td> <?php echo $row['equipment_name'];?> </td>
           <td> <?php echo $row['equipment_type'];?> </td>
           <td> <?php echo $row['brand_model'];?></td> 
           <td id="qtyrow_<?php echo $row['assest_id'] ?>"> <?php echo $row['qty'];?> </td>
           <td> <?php echo $row['remarks'];?></td> 
           <td> <input type="number" class="form-control text-center" id="qty_<?php echo $row['assest_id'];?>" value = "1" min = "0" max = "<?php echo $row['qty'];?>" style="width:60px"></td>
           <td>
-          <button type = "button" data-dismiss="modal" class ="addbtn btn btn-success" value="<?php echo $row['assest_id'];?>" onclick="showUser(this.value,<?php echo $row['qty'];?>); deplete(this.value);">Add Product </button></td>
+          <button type = "button" data-dismiss="modal" class ="addbtn btn btn-success" value="<?php echo $row['assest_id'];?>" onclick="showUser(this.value,document.getElementById('qty_<?php echo $row['assest_id'];?>').value); deplete(this.value);">Add Product </button></td>
           </form>
               
           </tr>
@@ -416,25 +416,33 @@ var idnum = "";
     });
   });
 
-  function showUser(id,qty) {
-    if(!document.getElementById("row_"+id)){
-      var table = document.getElementById("txtHint");
-      var row = table.insertRow(table.rows.length);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      row.id = "row_"+id;
-      cell3.id = "cell3_"+id;
-      cell1.innerHTML = "<input  type='hidden' name='database[]' class='form-control' value='" +id +"' >";
-      cell2.innerHTML = "<input  name='data[]' readonly class='form-control' value='" +document.getElementById("equipname_"+id).innerHTML +"' >";
-      cell3.innerHTML = "<input id='qtyinput_"+id+"' readonly name='qtydata[]' class='form-control' value='" +document.getElementById("qty_"+id).value +"' >";
-
-      cell4.innerHTML = "<button class='btn btn-danger' name='" + id +"' onclick='deleteThis("+ id +","+ qty +");'> <span class='fa fa-trash'></span> </button>";
-   }else if(document.getElementById("qty_"+id).value > 0){
-      document.getElementById("qtyinput_"+id).value = parseInt(document.getElementById("qtyinput_"+id).value) + parseInt(document.getElementById("qty_"+id).value);
+  function showUser(str,qty) {
+    idnum = str;
+    if(!document.getElementById("section_"+str)){
+      if (str == "") {
+          document.getElementById("txtHint").innerHTML = "";
+          return;
+      } else{ 
+          if (window.XMLHttpRequest) {
+              // code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp = new XMLHttpRequest();
+          } else {
+              // code for IE6, IE5
+              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.onreadystatechange = function() {
+              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                  document.getElementById("txtHint").innerHTML += xmlhttp.responseText;
+              }
+          };
+          xmlhttp.open("GET","test.php?q="+str+"&qty="+qty,true);
+          xmlhttp.send();
+      }
     }else{
-      alert("No more item!");
+      var currentVal = document.getElementById('qtyinput_'+str).value;
+      var addVal = document.getElementById('qty_'+str).value
+      var newVal = +currentVal + +addVal;
+      document.getElementById('qtyinput_'+str).value = newVal;
     }
   }
 
@@ -442,7 +450,7 @@ var idnum = "";
     document.getElementById("qtyrow_"+id).innerHTML = realQty;
     document.getElementById('qty_'+id).max = realQty;
     document.getElementById('qty_'+id).value = 1;
-    $("#row_"+id).remove();
+    $("#section_"+id).remove();
   }
 
   function deplete(id){
