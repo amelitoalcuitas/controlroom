@@ -75,18 +75,25 @@ $userin = $_SESSION["name"];
         </li>
 
         <li class="treeview">
+          <a href="return_eqp.php">
+            <i class="fa fa-inbox"></i>
+            <span>Return Equipments</span>
+          </a>
+        </li>
+
+        <li class="treeview">
           <a href="room.php">
             <i class="fa fa-home"></i>
             <span>Rooms</span>
           </a>
         </li>
 
-         <li class="treeview">
+      <!--    <li class="treeview">
           <a href="scan.php">
             <i class="fa fa-camera"></i>
             <span>Scan</span>
           </a>
-        </li>
+        </li> -->
 
          <li class="treeview">
           <a href="new_admin.php">

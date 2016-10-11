@@ -138,7 +138,8 @@ $userin = $_SESSION["name"];
                 student.student_name,
                 student.student_course,
                 student.student_year,
-                equipment.equipment_name
+                equipment.equipment_name,
+                equipment.qty
                 from equipment_reserved
                 JOIN student ON student.student_id = equipment_reserved.stud_id
                 JOIN equipment ON equipment.assest_id = equipment_reserved.equip_id
@@ -199,7 +200,7 @@ $userin = $_SESSION["name"];
                   ?>
                   <tr>
                     <td> <?php echo $row['equipment_name'];?> </td>
-                     <td><?php echo $row['equipment_name'];?></td>
+                     <td><?php echo $row['qty'];?></td>
                     </tr>
                   <?php } 
                     

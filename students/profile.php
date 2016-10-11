@@ -110,7 +110,7 @@ $userin = $_SESSION["user"];
                   $image_path=$profilerow["img_path"];
                  ?>
 
-                  <div class="col-md-1 col-md-offset-2">
+                  <div class="col-md-0 col-md-offset-2">
                                     <img class = "thumbnail" src="<?php echo $image_path; ?><?php echo $image_name; ?>" alt="<?php echo $image_name; ?>" width="300" height="300">
                     <!--<img src = "user_images/default.jpg" class = "thumbnail" width="300" height = "300">-->
                   </div>

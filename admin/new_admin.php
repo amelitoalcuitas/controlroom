@@ -14,7 +14,7 @@ $userin = $_SESSION["name"];
 <!DOCTYPE html>
 <html>
 <head>
-<title> Register User </title>
+<title> New Admin </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Tell the browser to be responsive to screen width -->
@@ -72,6 +72,13 @@ $userin = $_SESSION["name"];
           </ul>-->
         </li>
 
+         <li class="treeview">
+          <a href="return_eqp.php">
+            <i class="fa fa-inbox"></i>
+            <span>Return Equipments</span>
+          </a>
+        </li>
+
         <li class="treeview">
           <a href="room.php">
             <i class="fa fa-home"></i>
@@ -79,12 +86,12 @@ $userin = $_SESSION["name"];
           </a>
         </li>
 
-         <li class="treeview">
+         <!-- <li class="treeview">
           <a href="scan.php">
             <i class="fa fa-camera"></i>
             <span>Scan</span>
           </a>
-        </li>
+        </li> -->
 
          <li class="active treeview">
           <a href="new_admin.php">
@@ -110,11 +117,11 @@ $userin = $_SESSION["name"];
 
       <ol class="breadcrumb">
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Scan</li>
+        <li class="active">New Admin</li>
       </ol>
 
 
-        <section class="content">
+        <section class="content" style="height: 520px;">
       <div class="row">
       
           <div class="col-md-6 col-md-offset-0">

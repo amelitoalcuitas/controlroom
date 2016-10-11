@@ -23,7 +23,7 @@
 
  echo '<script language="javascript">';
 
-    echo 'alert("success")';
+    echo 'alert("Success!")';
       header("Refresh: 0; url= facslip.php");
 
 echo '</script>';

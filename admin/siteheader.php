@@ -75,6 +75,9 @@
                 <div class="pull-right">
                   <a href="C_admin_logout.php" class="btn btn-default btn-flat">Sign out</a>
                 </div>
+                 <div class="pull-left">
+                  <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
+                </div>
               </li>
             </ul>
           </li>

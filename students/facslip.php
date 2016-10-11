@@ -120,7 +120,7 @@ $userin = $_SESSION["user"];
               {
                  ?>
 
-            <form role="form" action = "facslip_process.php" method = "post">
+            <form role="form" action = "facslip_process.php" method = "post" onsubmit="return isValidForm()">
 
                <!-- Student Id-->
                 <div class="form-group">
@@ -185,7 +185,7 @@ $userin = $_SESSION["user"];
 
             echo '<div class="hidden"><input type = "text" class="form-control" name = "room_subj_id" value= "'.$room.'" readonly/> </div>'; '<br>';
 
-            echo '<div class="form-group"> <input type = "text" class="form-control" name = "start" value= "'.$row['start_time'].'" readonly/> </div>';
+            echo '<div class="form-group"> <input id = "roomcheck" type = "text" class="form-control" name = "start" value= "'.$row['start_time'].'" readonly/> </div>';
 
             echo '<div class="form-group"> <input type = "text" class="form-control" name = "end" value= "'.$row['end_time'].'" readonly/> </div>';
 
@@ -203,7 +203,7 @@ $userin = $_SESSION["user"];
     }
     ?>
 
-                <button style="float:right" class="btn btn-primary" type="submit" value = "submit" name = "submit"> Submit Form </button>
+                <button style="float:right" class="btn btn-primary" type="submit" value = "submit" name = "submit" > Submit Form </button>
               </form>
             </div>
             <!-- /.box-body -->
@@ -537,6 +537,12 @@ $userin = $_SESSION["user"];
 </div>
 <!-- ./wrapper -->
 <script>
+  function isValidForm(){
+    if(document.getElementById("roomcheck")){
+      return true;
+    }
+    return false;
+  }
 
   function showSched(str){
     if (str == "") {
